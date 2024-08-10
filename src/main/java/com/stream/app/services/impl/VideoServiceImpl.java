@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -70,20 +71,19 @@ public class VideoServiceImpl implements VideoService {
 
 	@Override
 	public Video getVideoById(String videoId) {
-		// TODO Auto-generated method stub
-		return null;
+		return videoRepository.findById(videoId)
+				.orElseThrow(() -> new RuntimeException("Video not found"));
 	}
 
 	@Override
 	public Video getVideoByTitle(String title) {
-		// TODO Auto-generated method stub
+		Optional<Video> video = videoRepository.findByTitle(title);
 		return null;
 	}
 
 	@Override
 	public List<Video> getAllVideos() {
-		// TODO Auto-generated method stub
-		return null;
+		return videoRepository.findAll();
 	}
 
 }
