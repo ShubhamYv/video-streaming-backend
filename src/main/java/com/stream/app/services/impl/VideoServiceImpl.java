@@ -77,8 +77,9 @@ public class VideoServiceImpl implements VideoService {
 
 	@Override
 	public Video getVideoByTitle(String title) {
-		Optional<Video> video = videoRepository.findByTitle(title);
-		return null;
+		Video video = videoRepository.findByTitle(title)
+		.orElseThrow(()-> new RuntimeException("Video not found with title: "+ title));
+		return video;
 	}
 
 	@Override
